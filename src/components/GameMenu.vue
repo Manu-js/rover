@@ -1,10 +1,8 @@
 <template>
   <v-container>
     <div>
-      <v-btn @click="orders.push('A')">avance</v-btn> 
-      <v-btn @click="orders.push('R')">Izquierda</v-btn> 
-      <v-btn @click="orders.push('L')">derecha</v-btn> 
-      <v-btn @click="go()">GO</v-btn>
+      <button-selector v-on:makeActions="go">
+      </button-selector>
 
       <v-textarea
             label="rows"
@@ -27,7 +25,6 @@
 
       <v-btn @click="resetTab()">apply new games!!</v-btn>
     
-      actual orders: {{orders}}
     </div>
 
     <div>
@@ -44,8 +41,10 @@
 
 <script>
 import axios from "axios"
+import ButtonSelector from './ButtonSelector.vue'
 
-  export default {
+export default {
+  components: { ButtonSelector },
     name: 'HelloWorld',
 
   data() {
@@ -81,8 +80,8 @@ import axios from "axios"
                return '<'
             }
       },
-      async go(){
-        this.orders.forEach(element => {
+      async go(orders){
+        orders.forEach(element => {
           this.score++
           if(element === "A") {
             switch (this.orientation[this.actualOrientation]) {
@@ -125,7 +124,6 @@ import axios from "axios"
           }  
 
         })
-         this.orders = []
          
       },
       comparePosition(){
