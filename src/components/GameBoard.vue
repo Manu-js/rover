@@ -24,47 +24,25 @@
           >
         </div>
       </div>
-      Score: {{ score }}
+      <div>
+        Score: {{ score }}
+      </div>
       <v-btn>
         <RouterLink class="header__nav__link" :to="{ name: 'MainMenu' }"
           >Main Menu</RouterLink
         >
       </v-btn>
     </div>
-    <modal ref="finishedGame">
-        <template #tittle>
-        <span>CONGRATS!!!!</span>
-      </template>
-      <div>
-        <span>
-          Congrats {{nickName}}, you win this game with {{score}} points =) =) =)
-        </span>
-      </div>
-      <template #footer>
-        <v-card-actions class="px-0 mt-2">
-          <v-spacer />
-          <v-btn color="primary" class="text-white">
-            <RouterLink
-              style="color: white"
-              :to="{
-                path: '/',
-              }"
-              >Back to main menu</RouterLink
-            >
-          </v-btn>
-        </v-card-actions>
-      </template>
-    </modal>
+    <finish-game-modal ref="finishModal" :score="score" :nickName="nickName" />
   </v-container>
 </template>
 
 <script>
-import axios from "axios";
-import ButtonSelector from "./ButtonSelector.vue";
-import Modal from "./dialogs/Modal.vue";
+import ButtonSelector from "./dialogs/ButtonSelector.vue";
+import FinishGameModal from './dialogs/FinishGameModal.vue';
 
 export default {
-  components: { ButtonSelector, Modal },
+  components: { ButtonSelector, FinishGameModal },
 
   data() {
     return {
@@ -80,11 +58,11 @@ export default {
     };
   },
   mounted() {
-    let pepe = [];
+    let auxBoard = [];
     for (let index = 0; index < this.rows; index++) {
-      pepe.push(Array.from(Array(Number(this.columns)).keys()));
+      auxBoard.push(Array.from(Array(Number(this.columns)).keys()));
     }
-    this.board = pepe;
+    this.board = auxBoard;
   },
   methods: {
     visualRover() {
@@ -99,7 +77,7 @@ export default {
           return "/roverImages/roverLeft.png";
       }
     },
-    async go(orders) {
+    go(orders) {
       for (let index = 0; index < orders.length; index++) {
         const element = orders[index];
 
@@ -131,18 +109,7 @@ export default {
           }
         }
         if (this.comparePosition()) {
-          await axios
-            .post("http://localhost:4000/add", {
-              name: this.nickName,
-              score: this.score,
-            })
-            .then((response) => {
-              this.$refs.finishedGame.show();
-              console.log(response);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          this.$refs.finishModal.openModal()
           return;
         }
       }

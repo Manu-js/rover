@@ -15,11 +15,11 @@ const router = new VueRouter({
       name: "MainMenu",
       component: () => import("../src/components/MainMenu") },
     {
-      path: "/GameMenu",
-      name: "GameMenu",
+      path: "/GameBoard",
+      name: "GameBoard",
       props: true,
       component: () =>
-        import("../src/components/GameMenu.vue")
+        import("../src/components/GameBoard.vue")
     }
   ]
 });

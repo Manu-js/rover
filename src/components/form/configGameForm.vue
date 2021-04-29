@@ -32,7 +32,7 @@
             <RouterLink
               style="color: white"
               :to="{
-                path: 'GameMenu',
+                path: 'GameBoard',
                 query: { rows: rows, columns: columns, nickName: nickName },
               }"
               >Start!!!</RouterLink

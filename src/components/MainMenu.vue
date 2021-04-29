@@ -10,8 +10,8 @@
 
 <script>
 import axios from "axios";
-import ConfigGameForm from './form/configGameForm.vue';
-import ScoreBoard from './tables/scoreBoard.vue';
+import ConfigGameForm from './form/ConfigGameForm.vue';
+import ScoreBoard from './tables/ScoreBoard.vue';
 
 export default {
   components: { ConfigGameForm, ScoreBoard },
