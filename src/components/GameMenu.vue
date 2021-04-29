@@ -2,29 +2,7 @@
   <v-container>
     <div>
       <button-selector v-on:makeActions="go">
-      </button-selector>
-
-      <v-textarea
-            label="rows"
-            auto-grow
-            outlined
-            rows="1"
-            v-model="rows"
-            type="number"
-            row-height="15"
-          ></v-textarea>
-          <v-textarea
-            label="column"
-            auto-grow
-            outlined
-            rows="1"
-            type="number"
-            v-model="columns"
-            row-height="15"
-          ></v-textarea>
-
-      <v-btn @click="resetTab()">apply new games!!</v-btn>
-    
+      </button-selector>    
     </div>
 
     <div>
@@ -35,6 +13,11 @@
           <span v-else>O</span>
         </div>
       </div>
+      Score: {{score}}
+      <v-btn>
+                <RouterLink class="header__nav__link" :to="{ name: 'MainMenu' }"
+                >Main Menu</RouterLink>
+      </v-btn>
     </div>
   </v-container>
 </template>
@@ -45,20 +28,26 @@ import ButtonSelector from './ButtonSelector.vue'
 
 export default {
   components: { ButtonSelector },
-    name: 'HelloWorld',
 
   data() {
     return{
        board : [],
       actualPosition: [0,0],
       orientation: ["N","W","S","E"],
-      actualOrientation: 0,
+      actualOrientation: 2,
       orders:[],
-      columns: 10,
-      rows : 10,
-      score: 0
+      score: 0,
+            rows: this.$route.query.rows,
+            columns: this.$route.query.columns
     }
     
+  },
+  mounted(){
+        let pepe = []
+        for (let index = 0; index < this.rows; index++) {
+         pepe.push(Array.from(Array(Number(this.columns)).keys()))       
+        }
+      this.board = pepe
   },
     methods: {
       resetTab(){

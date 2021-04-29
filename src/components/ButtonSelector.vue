@@ -1,17 +1,17 @@
 <template>
-    <div style="margin-bottom: 20px">
-        <v-btn @click="orders.push('A')">avance</v-btn> 
-        <v-btn @click="orders.push('R')">Izquierda</v-btn> 
-        <v-btn @click="orders.push('L')">derecha</v-btn> 
-
+    <div class="mb-4">
+        <v-btn class="mb-4" @click="orders.push('A')">move forward</v-btn>
+        <div class="mb-5"> 
+            <v-btn class="mr-4" @click="orders.push('R')">Left</v-btn> 
+            <v-btn @click="orders.push('L')">Right</v-btn> 
+        </div>
         <v-btn @click="doOrders()">GO</v-btn>
-    actual orders: {{orders}}
+        <span class="ml-4"> actual orders: {{orders}} </span>
     </div>
 </template>
 
 <script>
 export default{
-    //props:["orders"],
     data() {
         return {
             orders : []

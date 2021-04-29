@@ -1,7 +1,7 @@
 <template>
     <span>
-        <RouterLink class="header__nav__link" :to="{ name: 'GameMenu' }"
-                >Citas</RouterLink>
+        <RouterLink class="header__nav__link" :to="{ name: 'MainMenu' }"
+                >Main Menu</RouterLink>
     </span>
 </template>
 
