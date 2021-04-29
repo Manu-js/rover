@@ -20,12 +20,6 @@ const router = new VueRouter({
       props: true,
       component: () =>
         import("../src/components/GameMenu.vue")
-    },
-    {
-      path: "/ScoreBoard",
-      name: "ScoreBoard",
-      component: () =>
-        import("../src/components/ScoreBoard.vue")
     }
   ]
 });

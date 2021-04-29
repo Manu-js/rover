@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <div>
-      <span> Score Board </span>
+    <div class="border-2 border-indigo-600">
+      <v-data-table
+        :headers="headers"
+        :items="scoreItems.data"
+        :items-per-page="10"
+        class="elevation-1"
+        :sort-by="['score']"
+        :sort-desc="[true]"
+      ></v-data-table>
     </div>
-    <score-board/>
-    <config-game-form/>
-  </div>
 </template>
 
 <script>
 import axios from "axios";
-import ConfigGameForm from './form/configGameForm.vue';
-import ScoreBoard from './tables/scoreBoard.vue';
-
 export default {
-  components: { ConfigGameForm, ScoreBoard },
   data() {
     return {
       headers: [
@@ -30,9 +29,6 @@ export default {
         },
       ],
       scoreItems: [],
-      rows: 10,
-      columns: 10,
-      nickName: "",
     };
   },
   mounted() {
