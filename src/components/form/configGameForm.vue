@@ -27,17 +27,14 @@
       <template #footer>
         <v-card-actions class="px-0 mt-2">
           <v-spacer />
-          <v-btn text @click="$refs.newGameModal.hide()">Close</v-btn>
-          <v-btn color="primary" class="text-white">
+          <v-btn class="mr-2" text @click="$refs.newGameModal.hide()">Close</v-btn>
             <RouterLink
-              style="color: white"
               :to="{
                 path: 'GameBoard',
                 query: { rows: rows, columns: columns, nickName: nickName },
               }"
               >Start!!!</RouterLink
             >
-          </v-btn>
         </v-card-actions>
       </template>
     </modal>
